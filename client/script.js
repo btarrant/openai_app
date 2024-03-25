@@ -54,3 +54,32 @@ function chatStripe(isAi, value, uniqueId) {
       </div>
     `;
 }
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  // user's chat stripe
+  chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
+
+  form.reset();
+
+  // bot's chat stripe
+  const uniqueId = generateUniqueId();
+
+  chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
+
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  const messageDiv = document.getElementById(uniqueId);
+
+  loader(messageDiv);
+};
+
+form.addEventListener("submit", handleSubmit);
+form.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    handleSubmit(e);
+  }
+});
