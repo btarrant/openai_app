@@ -128,9 +128,21 @@ form.addEventListener("touchend", (e) => {
 });
 
 // Add touchstart event listener for form submission
+let shouldSubmitForm = false; // Flag to track whether form should be submitted
+
+// Add touchend event listener to handle form submission on touch devices
+form.addEventListener("touchend", (e) => {
+  e.preventDefault(); // Prevent default touch behavior
+  shouldSubmitForm = true; // Set flag to indicate form should be submitted
+});
+
+// Add touchstart event listener for form submission
 form.addEventListener("touchstart", (e) => {
   e.preventDefault(); // Prevent default touch behavior
-  handleSubmit(e); // Call handleSubmit function
+  if (shouldSubmitForm) {
+    handleSubmit(e); // Call handleSubmit function if flag is true
+    shouldSubmitForm = false; // Reset flag after form submission
+  }
 });
 
 // Modify the keyup event listener to handle both keyboard and touch events
@@ -146,8 +158,8 @@ form.addEventListener("keyup", (e) => {
 
     textArea.value = newValue;
     textArea.setSelectionRange(currentPosition + 1, currentPosition + 1);
-  } else if (e.keyCode === 13) {
-    // If only Enter is pressed, submit the form
+  } else if (e.keyCode === 13 && !shouldSubmitForm) {
+    // If only Enter is pressed and form shouldn't be submitted automatically, call handleSubmit
     handleSubmit(e);
   }
 });
