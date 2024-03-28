@@ -127,7 +127,6 @@ form.addEventListener("touchend", (e) => {
   e.preventDefault(); // Prevent default touch behavior
 });
 
-// Add touchstart event listener for form submission
 let shouldSubmitForm = false; // Flag to track whether form should be submitted
 
 // Add touchend event listener to handle form submission on touch devices
@@ -144,6 +143,15 @@ form.addEventListener("touchstart", (e) => {
     shouldSubmitForm = false; // Reset flag after form submission
   }
 });
+
+// Add focus event listener for form input fields to prevent accidental form submission on touch devices
+form.addEventListener(
+  "focus",
+  (e) => {
+    shouldSubmitForm = false; // Reset flag to prevent form submission
+  },
+  true
+); // Use capture phase to ensure this event listener is called before others
 
 // Modify the keyup event listener to handle both keyboard and touch events
 form.addEventListener("keyup", (e) => {
