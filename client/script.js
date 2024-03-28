@@ -116,9 +116,20 @@ const handleSubmit = async (e) => {
   }
 };
 
-form.addEventListener("submit", handleSubmit);
 form.addEventListener("keyup", (e) => {
-  if (e.keyCode === 13) {
+  if (e.shiftKey && e.keyCode === 13) {
+    // If Shift+Enter is pressed, add a new line instead of submitting the form
+    const textArea = e.target;
+    const currentPosition = textArea.selectionStart;
+    const currentValue = textArea.value;
+
+    const newValue =
+      currentValue.substring(0, currentPosition) + "\n" + currentValue.substring(currentPosition);
+
+    textArea.value = newValue;
+    textArea.setSelectionRange(currentPosition + 1, currentPosition + 1);
+  } else if (e.keyCode === 13) {
+    // If only Enter is pressed, submit the form
     handleSubmit(e);
   }
 });
