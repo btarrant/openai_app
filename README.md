@@ -17,7 +17,7 @@ To use CodeCraft, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/btarrant/apenai_app.git
+   git clone https://github.com/btarrant/openai_app.git
    ```
 
 2. Open `index.html` in your web browser.
