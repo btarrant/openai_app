@@ -78,7 +78,7 @@ const handleSubmit = async (e) => {
 
   // fetch data from server => bot's response
   try {
-    const response = await fetch("http://localhost:5000", {
+    const response = await fetch("https://codecraft-wdtq.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
