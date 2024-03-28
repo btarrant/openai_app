@@ -77,18 +77,43 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   // fetch data from server => bot's response
-  const response = await fetch("http://localhost:5000", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      prompt: data.get("prompt"),
-    }),
-  });
+  try {
+    const response = await fetch("http://localhost:5000", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: data.get("prompt"),
+      }),
+    });
 
-  clearInterval(loadInterval);
-  messageDiv.innerHTML = "";
+    clearInterval(loadInterval);
+    messageDiv.innerHTML = "";
+
+    if (response.ok) {
+      const responseData = await response.json(); // Parse response as JSON
+      console.log("Response from server:", responseData);
+
+      // Check if responseData has the 'bot' property and it's not empty
+      if (responseData && responseData.bot && responseData.bot.trim() !== "") {
+        const parsedData = responseData.bot.trim();
+        console.log({ parsedData });
+        typeText(messageDiv, parsedData);
+      } else {
+        console.error("Invalid response format from server");
+        messageDiv.innerHTML = "Something went wrong";
+      }
+    } else {
+      const err = await response.text();
+      console.error("Error from server:", err);
+      messageDiv.innerHTML = "Something went wrong";
+      alert(err);
+    }
+  } catch (error) {
+    console.error("Error fetching data from server:", error);
+    messageDiv.innerHTML = "Something went wrong";
+  }
 };
 
 form.addEventListener("submit", handleSubmit);
