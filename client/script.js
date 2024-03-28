@@ -122,6 +122,18 @@ form.addEventListener("touchstart", (e) => {
 });
 
 // Modify the keyup event listener to handle both keyboard and touch events
+// Add touchend event listener to prevent default touch behavior
+form.addEventListener("touchend", (e) => {
+  e.preventDefault(); // Prevent default touch behavior
+});
+
+// Add touchstart event listener for form submission
+form.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // Prevent default touch behavior
+  handleSubmit(e); // Call handleSubmit function
+});
+
+// Modify the keyup event listener to handle both keyboard and touch events
 form.addEventListener("keyup", (e) => {
   if (e.shiftKey && e.keyCode === 13) {
     // If Shift+Enter is pressed, add a new line instead of submitting the form
@@ -138,10 +150,4 @@ form.addEventListener("keyup", (e) => {
     // If only Enter is pressed, submit the form
     handleSubmit(e);
   }
-});
-
-// Add touchend event listener to stop default touch behavior and trigger form submission
-form.addEventListener("touchend", (e) => {
-  e.preventDefault(); // Prevent default touch behavior
-  form.submit(); // Trigger form submission
 });
