@@ -28,6 +28,8 @@ To use CodeCraft, follow these steps:
 
 3. Interact with the chatbot and enjoy the conversation!
 
+4. or live demo here - https://code-craft-one.vercel.app 
+
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute to CodeCraft, feel free to submit a pull request. Make sure to follow the existing code style and conventions.
