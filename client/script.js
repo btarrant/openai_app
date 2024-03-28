@@ -145,13 +145,12 @@ form.addEventListener("touchstart", (e) => {
 });
 
 // Add focus event listener for form input fields to prevent accidental form submission on touch devices
-form.addEventListener(
-  "focus",
-  (e) => {
+const formInputs = form.querySelectorAll("input, textarea");
+formInputs.forEach((input) => {
+  input.addEventListener("touchstart", (e) => {
     shouldSubmitForm = false; // Reset flag to prevent form submission
-  },
-  true
-); // Use capture phase to ensure this event listener is called before others
+  });
+});
 
 // Modify the keyup event listener to handle both keyboard and touch events
 form.addEventListener("keyup", (e) => {
