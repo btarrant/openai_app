@@ -2,7 +2,7 @@
 
 CodeCraft is an AI chatbot I created using vanilla JavaScript and the OpenAI API. This chatbot utilizes the GPT-3.5-turbo chat model to provide responsive conversational experiences on various devices. Additionally, Postman was employed for testing the OpenAI API integration.
 
-Live Demo: https://code-craft-one.vercel.app
+Live Site: https://code-craft-one.vercel.app
 
 
 ![Screenshot 2024-03-28 at 4 54 11 PM](https://github.com/btarrant/openai_app/assets/93632053/7e3b5421-797a-4fd0-84a8-ae8e64fd336e)
